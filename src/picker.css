@@ -1,0 +1,21 @@
+.picker
+{
+   padding: 20px;
+
+   width: 550px;
+   
+
+}
+
+.list{
+    display: flex;
+    align-items: center;
+   
+    /* border-bottom: solid 1px gray; */
+ 
+}
+.list .price
+{
+    position: absolute;;
+    right: 30px;
+}

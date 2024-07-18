@@ -1,0 +1,93 @@
+.mainlist{
+     display: flex;
+     flex-direction: column;
+     align-items: baseline;
+     margin: auto;
+
+}
+.listcontainer
+{
+    align-self: start;
+}
+.listItem
+{
+    width: max-content;
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+    cursor: pointer;
+    user-select: none;
+}
+.listItem Input[type='number']
+{
+  width: 50px;
+  height: 30px;
+  
+}
+/* .listItem Button{
+    background-color: rgb(101, 101, 224);
+    color: white;
+} */
+.heading
+{
+    width: 500px;
+    padding: 10px;
+    margin-right:10px ;
+    height: 20px;
+    border: 2px solid;
+    display: flex;
+    justify-content: space-between;
+
+}
+.variant
+{
+   border-radius: 20px;
+}
+.heading span{
+    cursor: pointer;
+}
+.discount{
+    display: flex;
+    width: 130px;
+    justify-content: space-around;
+}
+.variants{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: end;
+}
+.header
+{
+    display: flex;
+    position: static;
+    justify-content: space-between;
+    width: 650px;
+    left: 50px;
+    margin: 20px;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.mainlist.container {
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-weight: bold;
+  }
+  
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .dragging {
+    background: #f4f4f4;
+  }
+  
