@@ -1,18 +1,23 @@
 import React from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ProductItem from './ProductItem';
 import './list.css';
 import AddProductButton from './AddProductButton';
 
 const ProductList = ({ products, setProducts, setPickerOpen, setProductIndex }) => {
-  const handleOnDragEnd = (result) => {
-    if (!result.destination) return;
+  const onDragStart = (event, index) => {
+    event.dataTransfer.setData('index', index);
+  };
 
-    const items = Array.from(products);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+  const onDragOver = (event) => {
+    event.preventDefault();
+  };
 
-    setProducts(items);
+  const onDrop = (event, index) => {
+    const draggedIndex = event.dataTransfer.getData('index');
+    const updatedProducts = [...products];
+    const [draggedProduct] = updatedProducts.splice(draggedIndex, 1);
+    updatedProducts.splice(index, 0, draggedProduct);
+    setProducts(updatedProducts);
   };
 
   const handleEdit = (productIndex) => {
@@ -62,39 +67,30 @@ const ProductList = ({ products, setProducts, setPickerOpen, setProductIndex }) 
   };
 
   return (
-    <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="droppable-products">
-        {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef} className="mainlist container">
-            <div className="header">
-              <div>Title</div>
-              <div>Discount</div>
-            </div>
-            {products.map((product, index) => (
-              <Draggable key={product.id} draggableId={product.id.toString()} index={index}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <ProductItem
-                      index={index}
-                      product={product}
-                      updateProductDiscount={updateProductDiscount}
-                      handleEdit={handleEdit}
-                      handleDelete={handleDelete}
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-            <AddProductButton onAddProduct={handleAddProduct} />
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <div className="mainlist container">
+      <div className="header">
+        <div>Title</div>
+        <div>Discount</div>
+      </div>
+      {products.map((product, index) => (
+        <div
+          key={product.id}
+          draggable
+          onDragStart={(event) => onDragStart(event, index)}
+          onDragOver={onDragOver}
+          onDrop={(event) => onDrop(event, index)}
+        >
+          <ProductItem
+            index={index}
+            product={product}
+            updateProductDiscount={updateProductDiscount}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
+        </div>
+      ))}
+      <AddProductButton onAddProduct={handleAddProduct} />
+    </div>
   );
 };
 

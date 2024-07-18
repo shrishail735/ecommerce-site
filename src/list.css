@@ -90,4 +90,6 @@
   .dragging {
     background: #f4f4f4;
   }
-  
+.drag{
+    cursor: grab;
+}  

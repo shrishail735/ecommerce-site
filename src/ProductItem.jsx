@@ -93,9 +93,9 @@
 
 // ProductItem.js
 import React, { useState } from 'react';
-import { Checkbox, TextField, IconButton } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import EditIcon from '@material-ui/icons/Edit';
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 import './list.css'
 import Button from '@material-ui/core/Button';
 const ProductItem = ({ index , product, updateProductDiscount, handleEdit, handleDelete }) => {
@@ -126,6 +126,7 @@ const ProductItem = ({ index , product, updateProductDiscount, handleEdit, handl
     <div className='listcontainer' draggable='true' >
      
       <div className='listItem'>
+        <div className='drag'><DragIndicatorIcon/></div>
         <div className='heading'>{product.title}<span><EditIcon onClick={() => handleEdit(index)}/></span></div>
         {discountValue > 0 || disButton ? (
           <div className='discount'>
